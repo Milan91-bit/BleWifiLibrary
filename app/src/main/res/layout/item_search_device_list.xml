@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.milan.blewifilibrary.viewModel.SearchProductItemViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="@dimen/dp_6"
+        app:cardElevation="@dimen/dp_2"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/rectangle_item_dark_grey_selector"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{()->viewModel.itemClicked()}">
+
+            <TextView
+                android:id="@+id/device_name_centered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_18"
+                android:duplicateParentState="true"
+                android:gravity="start|center_vertical"
+                android:text="@{viewModel.productName}"
+                android:textSize="@dimen/sp_18"
+                android:textColor ="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

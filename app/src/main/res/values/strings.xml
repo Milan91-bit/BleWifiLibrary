@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BleWifiLibrary</string>
+    <string name="scan_product">Scan Ble Product</string>
+    <string name="please_ensure_you_are_near">Please ensure you are near your Ble product </string>
+    <string name="we_could_find_a_product_in_range">We couldn\'t find a \nproduct in range</string>
+    <string name="searching_for_your_product">Searching for \nyour product</string>
+    <string name="products_found">PRODUCTS FOUND</string>
+    <string name="no_products_found">NO PRODUCTS FOUND</string>
+
+</resources>

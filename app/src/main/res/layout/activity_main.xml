@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.milan.blewifilibrary.viewModel.MainActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/almost_black">
+
+        <TextView
+            android:id="@+id/search_product_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_53"
+            android:gravity="center_horizontal"
+            android:textColor ="@color/white"
+            android:textSize="@dimen/dp_23"
+            android:text="@{viewModel.currentState == viewModel.STATE_NO_DEVICE_FOUND ? @string/we_could_find_a_product_in_range : @string/searching_for_your_product}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/search_product_lottie_view"
+            android:layout_width="@dimen/dp_275"
+            android:layout_height="@dimen/dp_158"
+            android:layout_marginTop="@dimen/dp_38"
+            android:visibility="@{(viewModel.currentState == viewModel.STATE_SEARCHING || viewModel.currentState == viewModel.STATE_SEARCHING_AND_DEVICE_FOUND) ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_product_heading"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="animation/platinum_search_ble_scanning.json"
+            app:lottie_loop="true" />
+
+        <ImageView
+            android:id="@+id/search_product_rescan"
+            android:layout_width="@dimen/dp_158"
+            android:layout_height="@dimen/dp_158"
+            android:layout_marginTop="@dimen/dp_38"
+            android:onClick="@{()->viewModel.rescanButtonClick()}"
+            android:src="@drawable/search_again"
+            android:visibility="@{(viewModel.currentState != viewModel.STATE_SEARCHING &amp;&amp; viewModel.currentState != viewModel.STATE_SEARCHING_AND_DEVICE_FOUND) ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_product_heading" />
+
+        <TextView
+            android:id="@+id/search_product_device_list_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_52_2"
+            android:text="@{viewModel.currentState == viewModel.STATE_NO_DEVICE_FOUND ? @string/no_products_found : @string/products_found}"
+            android:textColor ="@color/white"
+            android:textSize="@dimen/dp_14"
+            android:visibility="@{viewModel.currentState != viewModel.STATE_SEARCHING ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_product_lottie_view" />
+
+        <TextView
+            android:id="@+id/search_product_device_list_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_22"
+            android:layout_marginStart="@dimen/dp_39"
+            android:layout_marginEnd="@dimen/dp_39"
+            android:gravity="center_horizontal"
+            android:text="@string/please_ensure_you_are_near"
+            android:textColor ="@color/white"
+            android:textSize="@dimen/dp_14"
+            android:visibility="@{viewModel.currentState == viewModel.STATE_NO_DEVICE_FOUND ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_product_device_list_heading" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_22"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_product_device_list_heading" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
